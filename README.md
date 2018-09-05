@@ -15,6 +15,8 @@ NOTE: YOU MUST CHECK THE "Add Python 3.x to PATH" BOX ON THE FIRST SCREEN
 
 3. download the spyder3_install file from this repository
 
+  pip install git+https://github.com/starmaid/spyder3-install
+
 5. Extract the file and then:
 
   windows: right-click the file and select "run with python.exe"
