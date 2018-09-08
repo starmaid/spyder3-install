@@ -2,6 +2,7 @@
 """
 Nicholas Masso
 8-31-2018
+updated 9-7-2018
 nicholas.masso.14@gmail.com
 nmasso@purdue.edu
 
@@ -16,14 +17,15 @@ out of the equation when setting up an IDE
 """
 import sys
 import os
-import path
+
     
 def installs(pypath):
     os.system(pypath+' -m pip install --upgrade pip')
     os.system(pypath+' -m pip install spyder --no-warn-script-location')
     #no warnings for adding spyder to PATH, i dont think thats really needed
 
-here = path.abspath(path.dirname(__file__))
+#find the path that we are installing to
+here = os.path.abspath(os.path.dirname(__file__))
 
 if sys.platform.startswith('win32') or  sys.platform.startswith('cygwin'):
     #windows
@@ -47,12 +49,15 @@ if sys.platform.startswith('win32') or  sys.platform.startswith('cygwin'):
     #print(spyder_dir)
     
     #this creates the shortcut
-    #TODO: use the spyder logo as the icon
     link_filepath = os.path.join(winshell.desktop(), "Spyder 3.lnk")
     with winshell.shortcut(link_filepath) as link:
+        #path to the program
         link.path = spyder_dir
+        #description
         link.description = "Shortcut to Spyder IDE"
-        link.icon = here+"/spyder.ico"
+        #where the icon file is
+        link.icon_location = here+"/spyder.ico",0
+
 elif sys.platform.startswith('darwin'):
     #mac osX
     installs('python3')
