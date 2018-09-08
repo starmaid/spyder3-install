@@ -22,6 +22,7 @@ import os
 def installs(pypath):
     os.system(pypath+' -m pip install --upgrade pip')
     os.system(pypath+' -m pip install spyder --no-warn-script-location')
+    os.system(pypath+' -m pip install numpy scipy matplotlib')
     #no warnings for adding spyder to PATH, i dont think thats really needed
 
 #find the path that we are installing to
