@@ -4,4 +4,3 @@ spyder3_install.egg-info/PKG-INFO
 spyder3_install.egg-info/SOURCES.txt
 spyder3_install.egg-info/dependency_links.txt
 spyder3_install.egg-info/top_level.txt
-src/spyder3-install.py

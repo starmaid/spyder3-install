@@ -1,11 +1,4 @@
-# -*- coding: utf-8 -*-
 """
-Nicholas Masso
-8-31-2018
-updated 9-7-2018
-nicholas.masso.14@gmail.com
-nmasso@purdue.edu
-
 This code is run from the python CLE to:
     -upgrade pip
     -install spyder
@@ -14,53 +7,55 @@ on any operating system.
 
 This takes the extra complications of Anaconda
 out of the equation when setting up an IDE
+
+Usage:
+    python3 spy....
 """
 import sys
 import os
 
+# Update usage
+# Rename installs and add docstring
     
 def installs(pypath):
-    os.system(pypath+' -m pip install --upgrade pip')
-    os.system(pypath+' -m pip install spyder --no-warn-script-location')
-    os.system(pypath+' -m pip install numpy scipy matplotlib')
-    #no warnings for adding spyder to PATH, i dont think thats really needed
+    os.system( pypath + ' -m pip install --upgrade pip' )
+    os.system( pypath + ' -m pip install spyder --no-warn-script-location' )
+    # No warnings for adding spyder to PATH, i dont think thats really needed
 
 #find the path that we are installing to
-here = os.path.abspath(os.path.dirname(__file__))
+here = os.path.abspath(os.path.dirname( __file__ ))
 
-if sys.platform.startswith('win32') or  sys.platform.startswith('cygwin'):
-    #windows
+if sys.platform.startswith( 'win32' ) or sys.platform.startswith( 'cygwin' ):
+    # For use on Windows OS machines
     
-    #first, use the PATH reference to python.exe on windows cmd
-    installs('py')
+    # First, use the PATH reference to python.exe on windows cmd
+    installs( 'py' )
     
-    #these are specific packages to create shortcuts on windows 7+
-    os.system('py -m pip install winshell')
-    os.system('py -m pip install pypiwin32')
+    # These are specific packages to create shortcuts on windows 7+
+    os.system( 'py -m pip install winshell' )
+    os.system( 'py -m pip install pypiwin32' )
+    
     import winshell
-    #winshell imports pypiwin32, so theres no need to import it
+    # Winshell imports pypiwin32, so theres no need to import it
     
-    #this is the directory of your python.exe file
+    # This is the directory of your python.exe file
     python_dir = sys.executable
-    #pip installs spyder in a subfolder in that location
-    spyder_dir = python_dir.replace('python.exe','Scripts\spyder3.exe')
     
-    #uncomment these if the shortcut isnt showing up
-    #print(sys.executable)    
-    #print(spyder_dir)
+    # Pip installs spyder in a subfolder in that location
+    spyder_dir = python_dir.replace( 'python.exe' , 'Scripts\spyder3.exe' )
     
-    #this creates the shortcut
-    link_filepath = os.path.join(winshell.desktop(), "Spyder 3.lnk")
+    # This segment creates the shortcut
+    link_filepath = os.path.join( winshell.desktop() , "Spyder 3.lnk" )
     with winshell.shortcut(link_filepath) as link:
-        #path to the program
+        # Path to the program
         link.path = spyder_dir
-        #description
+        # Description
         link.description = "Shortcut to Spyder IDE"
-        #where the icon file is
-        link.icon_location = here+"/spyder.ico",0
+        # Dhere the icon file is
+        link.icon_location = here + "/spyder.ico" , 0
 
-elif sys.platform.startswith('darwin'):
-    #mac osX
+elif sys.platform.startswith( 'darwin' ):
+    # For use on Mac osX
     installs('python3')
     
     #TODO: follow instructions at
@@ -68,9 +63,12 @@ elif sys.platform.startswith('darwin'):
     #to make the shortcut file...spyder.icns is in /src
     
 elif sys.platform.startswith('linux'):
-    #Linux
+    # Linux
     installs('python3')
 else:
-    #this is for other unix-based systems
-    installs()
+    # This is for other unix-based systems
+    print('Sorry, this script does not support your OS.')
+    print('Consider opening it in a text editor and following the steps')
+    os.system('read -p "Press ENTER to continue"')
+    #installs()
 
